@@ -76,6 +76,61 @@ class Linked_List {
     this.length++;
   }
 
+  // * Insert a node at a specific position
+  insertAt(index, value) {
+    if (index > this.length || index < 0) return null;
+    else if (index === 0) {
+      this.unshift(value);
+      return;
+    } else if (index === this.length) {
+      this.push(value);
+      return;
+    }
+
+    let currentNode = this.head;
+    let node = new Node(value);
+    // for loop to find the index-1's node
+    for (let i = 0; i < index - 1; i++) currentNode = currentNode.next;
+    node.next = currentNode.next; // new node's next point to the old index's node
+    currentNode.next = node; // index-1 node's next point to the new node
+
+    this.length++;
+  }
+
+  // * Remove a node at a specific position from the Linked List
+  removeAt(index) {
+    if (index >= this.length || index < 0) return null;
+    else if (index === 0) {
+      let rm_Node = this.shift();
+      return rm_Node;
+    } else if (index === this.length - 1) {
+      let rm_Node = this.pop();
+      return rm_Node;
+    }
+
+    let currentNode = this.head;
+    // for loop to find the index-1's node
+    for (let i = 0; i < index - 1; i++) currentNode = currentNode.next;
+
+    let rm_Node = currentNode.next;
+    currentNode.next = currentNode.next.next;
+
+    this.length--;
+
+    return rm_Node;
+  }
+
+  // * Get the node data at the Linked List
+  get(index) {
+    if (index >= this.length || index < 0) return null;
+
+    let currentNode = this.head;
+    // for loop to find the index's node
+    for (let i = 0; i < index; i++) currentNode = currentNode.next;
+
+    return currentNode.value;
+  }
+
   // * Print all nodes in the Linked List
   printAllNodes() {
     let currentNode = this.head;
@@ -104,6 +159,12 @@ console.log(rmNode);
 
 myLinkesList.push("Lin");
 myLinkesList.unshift("Opag");
+
+myLinkesList.insertAt(3, "Lapus");
+myLinkesList.removeAt(2);
+
+let findNode = myLinkesList.get(0);
+console.log(findNode);
 
 myLinkesList.printAllNodes();
 myLinkesList.printLength();
