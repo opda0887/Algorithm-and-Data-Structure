@@ -72,6 +72,24 @@ class BinarySearchTree {
     }
   }
 
+  // * BTF searching
+
+  search_recursively(node, key) {
+    if (node == null || node.value == key) return node;
+    else {
+      if (key < node.value) return this.search_recursively(node.left, key);
+      else return this.search_recursively(node.right, key);
+    }
+  }
+
+  search_interatively(node, key) {
+    while (node !== null && node.value != key) {
+      if (key < node.left) node = node.left;
+      else node = node.right;
+    }
+    return node;
+  }
+
   setPath_empty() {
     this.path = "";
   }
@@ -103,3 +121,6 @@ bst.setPath_empty();
 bst.postOrder(bst.root);
 console.log("Post_Order Traversal: " + bst.path);
 bst.setPath_empty();
+
+console.log(bst.search_recursively(bst.root, 8));
+console.log(bst.search_interatively(bst.root, 1));
