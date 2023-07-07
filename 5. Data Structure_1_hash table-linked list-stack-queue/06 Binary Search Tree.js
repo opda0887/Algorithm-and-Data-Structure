@@ -84,7 +84,7 @@ class BinarySearchTree {
 
   search_interatively(node, key) {
     while (node !== null && node.value != key) {
-      if (key < node.left) node = node.left;
+      if (key < node.value) node = node.left;
       else node = node.right;
     }
     return node;
