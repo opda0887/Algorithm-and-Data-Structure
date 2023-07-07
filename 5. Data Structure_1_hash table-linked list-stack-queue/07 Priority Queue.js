@@ -57,7 +57,7 @@ class PriorityQueue {
   }
 
   maxHeapify(parentIndex) {
-    let largestIndex;
+    let largestIndex = parentIndex;
     let leftIndex = parentIndex * 2 + 1;
     let rightIndex = parentIndex * 2 + 2;
     // find the largest value's index in: parentNode, leftNode, rightNode
@@ -66,7 +66,6 @@ class PriorityQueue {
       this.values[leftIndex].priority > this.values[parentIndex].priority
     )
       largestIndex = leftIndex;
-    else largestIndex = parentIndex;
     if (
       rightIndex <= this.values.length - 1 &&
       this.values[rightIndex].priority > this.values[largestIndex].priority
