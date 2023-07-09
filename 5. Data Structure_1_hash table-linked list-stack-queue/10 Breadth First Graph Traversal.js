@@ -93,3 +93,4 @@ function setPath(nodes_array) {
 BFGT(A);
 
 console.log(path);
+// out put: A E F D I B C G H J K M L
