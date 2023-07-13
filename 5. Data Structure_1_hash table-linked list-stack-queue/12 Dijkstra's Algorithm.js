@@ -73,7 +73,7 @@ class MinHeap {
     ) {
       // swap two node while newNode smaller than parentnode
       let parentNode = this.values[parentNode_Index];
-      parentNode = this.values[newNode_Index];
+      this.values[parentNode_Index] = this.values[newNode_Index];
       this.values[newNode_Index] = parentNode;
       // update index number
       newNode_Index = parentNode_Index;
@@ -124,4 +124,85 @@ class MinHeap {
       this.minHeapify(smallest_index); // do the function again with the old smallestNode's index
     }
   }
+
+  // sort minHeap when the node's distanceFromStartNode changed
+  decrease_piority(node) {
+    let node_index = this.values.indexOf(node);
+    let parentNode_index = Math.floor((node_index - 1) / 2);
+    while (
+      parentNode_index >= 0 &&
+      this.values[node_index].distanceFromStartNode <
+        this.values[parentNode_index].distanceFromStartNode
+    ) {
+      // swap 2 nodes
+      let targetNode = this.values[node_index];
+      this.values[node_index] = this.values[parentNode_index];
+      this.values[parentNode_index] = targetNode;
+      // update index
+      node_index = parentNode_index;
+      parentNode_index = Math.floor((node_index - 1) / 2);
+    }
+  }
 }
+
+function Dijkstra(startNode) {
+  let MH = new MinHeap();
+  // set the startNode's distance to 0, and be visited
+  startNode.distanceFromStartNode = 0;
+  startNode.visited = true;
+  // push all nodes to the minHeap
+  MH.enqueue(A);
+  MH.enqueue(B);
+  MH.enqueue(C);
+  MH.enqueue(D);
+  MH.enqueue(E);
+  MH.enqueue(F);
+  // get the smallest node of distanceFromStartNode (startNode)
+  let currentNode = MH.dequeue();
+  // 1. min heap最小值的node => currentNode
+  // 2. node鄰居中，沒有拜訪過的node => neighborNode
+  // 3. if (neighborNode.distance > currentNode.distance + weight)
+  //  => neighborNode.distance = currentNode.distance + weight
+  // 4. neighborNode.previous = currentNode, MH decrease neighborNode's priority
+  while (MH.values.length != 0) {
+    currentNode.edges.forEach((edge) => {
+      let neighborNode = edge.node;
+      let edge_weight = edge.edge_weight;
+      // prevent each travel twice
+      if (neighborNode.visited == false) {
+        if (
+          neighborNode.distanceFromStartNode >
+          currentNode.distanceFromStartNode + edge_weight
+        ) {
+          neighborNode.distanceFromStartNode =
+            currentNode.distanceFromStartNode + edge_weight;
+          neighborNode.previousNode = currentNode;
+          MH.decrease_piority(neighborNode);
+        }
+      }
+    });
+    currentNode = MH.dequeue(); // get the smallest node of distanceFromStartNode from minHeap again
+    currentNode.visited = true;
+  }
+}
+
+// run the function
+Dijkstra(A);
+console.log("A's information");
+console.log(A.distanceFromStartNode);
+console.log(A.previousNode);
+console.log("B's Info");
+console.log(B.distanceFromStartNode);
+console.log(B.previousNode.value);
+console.log("C's Info");
+console.log(C.distanceFromStartNode);
+console.log(C.previousNode.value);
+console.log("D's Info");
+console.log(D.distanceFromStartNode);
+console.log(D.previousNode.value);
+console.log("E's Info");
+console.log(E.distanceFromStartNode);
+console.log(E.previousNode.value);
+console.log("F's Info");
+console.log(F.distanceFromStartNode);
+console.log(F.previousNode.value);
