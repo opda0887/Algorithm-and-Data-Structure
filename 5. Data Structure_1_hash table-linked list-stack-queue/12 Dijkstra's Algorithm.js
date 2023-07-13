@@ -106,12 +106,12 @@ class MinHeap {
 
     // find the smallestNode's index
     if (
-      leftNode_index <= this.values.length &&
+      leftNode_index < this.values.length &&
       this.values[leftNode_index] < this.values[parentNode_index]
     )
       smallest_index = leftNode_index;
     if (
-      rightNode_index <= this.values.length &&
+      rightNode_index < this.values.length &&
       this.values[rightNode_index] < this.values[smallest_index]
     )
       smallest_index = rightNode_index;

@@ -62,12 +62,12 @@ class PriorityQueue {
     let rightIndex = parentIndex * 2 + 2;
     // find the largest value's index in: parentNode, leftNode, rightNode
     if (
-      leftIndex <= this.values.length - 1 &&
+      leftIndex < this.values.length &&
       this.values[leftIndex].priority > this.values[parentIndex].priority
     )
       largestIndex = leftIndex;
     if (
-      rightIndex <= this.values.length - 1 &&
+      rightIndex < this.values.length &&
       this.values[rightIndex].priority > this.values[largestIndex].priority
     )
       largestIndex = rightIndex;
