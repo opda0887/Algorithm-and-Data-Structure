@@ -107,12 +107,14 @@ class MinHeap {
     // find the smallestNode's index
     if (
       leftNode_index < this.values.length &&
-      this.values[leftNode_index] < this.values[parentNode_index]
+      this.values[leftNode_index].distanceFromStartNode <
+        this.values[parentNode_index].distanceFromStartNode
     )
       smallest_index = leftNode_index;
     if (
       rightNode_index < this.values.length &&
-      this.values[rightNode_index] < this.values[smallest_index]
+      this.values[rightNode_index].distanceFromStartNode <
+        this.values[smallest_index].distanceFromStartNode
     )
       smallest_index = rightNode_index;
 
@@ -206,3 +208,23 @@ console.log(E.previousNode.value);
 console.log("F's Info");
 console.log(F.distanceFromStartNode);
 console.log(F.previousNode.value);
+/**
+ *  A's information
+    0
+    null
+    B's Info
+    2
+    A
+    C's Info
+    2
+    A
+    D's Info
+    3
+    B
+    E's Info
+    5
+    D
+    F's Info
+    4
+    C
+ */
